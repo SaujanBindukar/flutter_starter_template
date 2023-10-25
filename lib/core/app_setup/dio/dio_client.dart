@@ -32,7 +32,7 @@ Dio dio(Ref ref) {
     LogInterceptor(),
     RequestInterceptors(ref: ref),
     ResponseInterceptors(),
-    ErrorInterceptors(),
+    ErrorInterceptors(ref: ref),
   ]);
 
   return dio;

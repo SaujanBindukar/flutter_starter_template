@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_starter_template/core/extension/context_extension.dart';
+import 'package:flutter_starter_template/core/widgets/custom_button.dart';
+import 'package:flutter_starter_template/core/widgets/custom_textfield.dart';
 import 'package:flutter_starter_template/feature/auth/application/auth_controller.dart';
 
 final signInProvider =
@@ -37,38 +39,34 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             children: [
-              TextFormField(
+              CustomTextField(
                 controller: _emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
-                ),
+                hintText: 'Email',
+                labelText: 'Email',
               ),
               const SizedBox(height: 20),
-              TextFormField(
+              CustomTextField(
                 controller: _passwordController,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
-                ),
+                hintText: 'Password',
+                labelText: 'Password',
+                obscureText: true,
               ),
               const SizedBox(height: 20),
               Consumer(builder: (context, ref, child) {
                 final authState = ref.watch(signInProvider);
-
-                return ElevatedButton(
+                return CustomButton(
+                  padding: EdgeInsets.zero,
+                  name: 'Login',
+                  isLoading: authState is AsyncLoading,
                   onPressed: () {
                     ref.read(signInProvider.notifier).login(
                           email: _emailController.text,
                           password: _passwordController.text,
                         );
                   },
-                  child: authState is AsyncLoading
-                      ? const CircularProgressIndicator()
-                      : const Text('Login'),
                 );
               }),
               Consumer(builder: (context, ref, child) {

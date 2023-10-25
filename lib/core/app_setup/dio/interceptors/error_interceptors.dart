@@ -1,10 +1,19 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_starter_template/core/app/app_state.dart';
+import 'package:flutter_starter_template/core/app/application/app_controller.dart';
 
 class ErrorInterceptors extends InterceptorsWrapper {
+  Ref ref;
+  ErrorInterceptors({
+    required this.ref,
+  });
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode == 401) {
-      //TODO: logout user from the app
+      ref
+          .read(appNotifierProvider.notifier)
+          .updateAppState(const AppState.unAuthenticated());
     }
     super.onError(err, handler);
   }
