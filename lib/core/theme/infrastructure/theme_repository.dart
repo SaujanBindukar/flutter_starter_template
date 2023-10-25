@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_starter_template/core/app_setup/hive/hive_box.dart';
 import 'package:hive/hive.dart';
 
 final iThemeRepositoryProvider = Provider<IThemeRepository>((ref) {
@@ -15,7 +16,7 @@ class ThemeRepository implements IThemeRepository {
   @override
   Future<void> cacheCurrentTheme({required bool isDarkMode}) async {
     try {
-      final box = await Hive.openLazyBox<bool>('themeBox');
+      final box = await Hive.openLazyBox<bool>(HiveBox.themeBox);
       await box.put('currentTheme', isDarkMode);
     } catch (e) {
       debugPrint('error in hive box $e');
@@ -25,7 +26,7 @@ class ThemeRepository implements IThemeRepository {
   @override
   Future<bool> getCurrentTheme() async {
     try {
-      final box = await Hive.openLazyBox<bool>('themeBox');
+      final box = await Hive.openLazyBox<bool>(HiveBox.themeBox);
       final isDarkMode = box.isEmpty ? false : await box.get('currentTheme');
       return isDarkMode ?? false;
     } catch (e) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_starter_template/core/theme/application/theme_provider.dart';
 import 'package:flutter_starter_template/core/app_setup/hive/hive_setup.dart';
@@ -8,7 +9,12 @@ import 'package:flutter_starter_template/my_observer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await HiveSetup.initHive();
+
+  await Future.wait([
+    HiveSetup.initHive(),
+    dotenv.load(fileName: '.env'),
+  ]);
+
   runApp(
     ProviderScope(
       observers: [

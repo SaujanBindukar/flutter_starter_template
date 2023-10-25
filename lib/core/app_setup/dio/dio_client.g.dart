@@ -6,7 +6,7 @@ part of 'dio_client.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$baseUrlHash() => r'118b711aeadf96433a5bb83576babda2d73fe069';
+String _$baseUrlHash() => r'e5209a8f3a8bb0d3dbc0ff4864a4b62d21c7c7d0';
 
 /// See also [baseUrl].
 @ProviderFor(baseUrl)
@@ -20,7 +20,7 @@ final baseUrlProvider = AutoDisposeProvider<String>.internal(
 );
 
 typedef BaseUrlRef = AutoDisposeProviderRef<String>;
-String _$dioHash() => r'aedc6e068ce2961b7070a0b6a0dc630370c3d907';
+String _$dioHash() => r'305178d06a0bbc4017761b5e5ddceafda0ff493f';
 
 /// See also [dio].
 @ProviderFor(dio)

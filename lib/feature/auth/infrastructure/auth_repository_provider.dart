@@ -6,5 +6,5 @@ part 'auth_repository_provider.g.dart';
 
 @riverpod
 IAuthRepository authRepository(Ref ref) {
-  return AuthRepository();
+  return AuthRepository(ref: ref);
 }

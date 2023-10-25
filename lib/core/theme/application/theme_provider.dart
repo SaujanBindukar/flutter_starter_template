@@ -8,6 +8,7 @@ part 'theme_provider.g.dart';
 class Theme extends _$Theme {
   @override
   FutureOr<ThemeMode> build() async {
+    state = const AsyncData(ThemeMode.light);
     final theme = await ref.read(iThemeRepositoryProvider).getCurrentTheme();
     return theme ? ThemeMode.dark : ThemeMode.light;
   }
