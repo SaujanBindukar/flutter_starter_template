@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_starter_template/core/app/app_state.dart';
+import 'package:flutter_starter_template/core/app/application/app_controller.dart';
 import 'package:flutter_starter_template/core/widgets/custom_button.dart';
 import 'package:flutter_starter_template/core/widgets/custom_textfield.dart';
-import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
@@ -22,7 +23,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            context.go('/signin');
+            ref
+                .read(appNotifierProvider.notifier)
+                .updateAppState(const AppState.unAuthenticated(isSignIn: true));
           },
           icon: const Icon(Icons.chevron_left_outlined),
         ),
@@ -60,31 +63,42 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 onPressed: () {},
                 name: 'Sign up',
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Already have an account? ",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      context.go('/signin');
-                    },
-                    child: Text(
-                      'Sign In',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                  ),
-                ],
-              ),
+              const _SignInNavigationWidget(),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class _SignInNavigationWidget extends ConsumerWidget {
+  const _SignInNavigationWidget();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Already have an account? ",
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
+        ),
+        InkWell(
+          onTap: () {
+            ref
+                .read(appNotifierProvider.notifier)
+                .updateAppState(const AppState.unAuthenticated(isSignIn: true));
+          },
+          child: Text(
+            'Sign In',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -20,21 +20,21 @@ mixin _$AppState<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() authenticated,
-    required TResult Function() unAuthenticated,
+    required TResult Function(bool isSignIn) unAuthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? authenticated,
-    TResult? Function()? unAuthenticated,
+    TResult? Function(bool isSignIn)? unAuthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? authenticated,
-    TResult Function()? unAuthenticated,
+    TResult Function(bool isSignIn)? unAuthenticated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,7 +120,7 @@ class _$AppStartedImpl<T> implements _AppStarted<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() authenticated,
-    required TResult Function() unAuthenticated,
+    required TResult Function(bool isSignIn) unAuthenticated,
   }) {
     return started();
   }
@@ -130,7 +130,7 @@ class _$AppStartedImpl<T> implements _AppStarted<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? authenticated,
-    TResult? Function()? unAuthenticated,
+    TResult? Function(bool isSignIn)? unAuthenticated,
   }) {
     return started?.call();
   }
@@ -140,7 +140,7 @@ class _$AppStartedImpl<T> implements _AppStarted<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? authenticated,
-    TResult Function()? unAuthenticated,
+    TResult Function(bool isSignIn)? unAuthenticated,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -228,7 +228,7 @@ class _$AuthenticatedImpl<T> implements _Authenticated<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() authenticated,
-    required TResult Function() unAuthenticated,
+    required TResult Function(bool isSignIn) unAuthenticated,
   }) {
     return authenticated();
   }
@@ -238,7 +238,7 @@ class _$AuthenticatedImpl<T> implements _Authenticated<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? authenticated,
-    TResult? Function()? unAuthenticated,
+    TResult? Function(bool isSignIn)? unAuthenticated,
   }) {
     return authenticated?.call();
   }
@@ -248,7 +248,7 @@ class _$AuthenticatedImpl<T> implements _Authenticated<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? authenticated,
-    TResult Function()? unAuthenticated,
+    TResult Function(bool isSignIn)? unAuthenticated,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -301,6 +301,8 @@ abstract class _$$UnAuthenticatedImplCopyWith<T, $Res> {
   factory _$$UnAuthenticatedImplCopyWith(_$UnAuthenticatedImpl<T> value,
           $Res Function(_$UnAuthenticatedImpl<T>) then) =
       __$$UnAuthenticatedImplCopyWithImpl<T, $Res>;
+  @useResult
+  $Res call({bool isSignIn});
 }
 
 /// @nodoc
@@ -310,35 +312,61 @@ class __$$UnAuthenticatedImplCopyWithImpl<T, $Res>
   __$$UnAuthenticatedImplCopyWithImpl(_$UnAuthenticatedImpl<T> _value,
       $Res Function(_$UnAuthenticatedImpl<T>) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isSignIn = null,
+  }) {
+    return _then(_$UnAuthenticatedImpl<T>(
+      isSignIn: null == isSignIn
+          ? _value.isSignIn
+          : isSignIn // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$UnAuthenticatedImpl<T> implements _UnAuthenticated<T> {
-  const _$UnAuthenticatedImpl();
+  const _$UnAuthenticatedImpl({required this.isSignIn});
+
+  @override
+  final bool isSignIn;
 
   @override
   String toString() {
-    return 'AppState<$T>.unAuthenticated()';
+    return 'AppState<$T>.unAuthenticated(isSignIn: $isSignIn)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UnAuthenticatedImpl<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$UnAuthenticatedImpl<T> &&
+            (identical(other.isSignIn, isSignIn) ||
+                other.isSignIn == isSignIn));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, isSignIn);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UnAuthenticatedImplCopyWith<T, _$UnAuthenticatedImpl<T>> get copyWith =>
+      __$$UnAuthenticatedImplCopyWithImpl<T, _$UnAuthenticatedImpl<T>>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() authenticated,
-    required TResult Function() unAuthenticated,
+    required TResult Function(bool isSignIn) unAuthenticated,
   }) {
-    return unAuthenticated();
+    return unAuthenticated(isSignIn);
   }
 
   @override
@@ -346,9 +374,9 @@ class _$UnAuthenticatedImpl<T> implements _UnAuthenticated<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? authenticated,
-    TResult? Function()? unAuthenticated,
+    TResult? Function(bool isSignIn)? unAuthenticated,
   }) {
-    return unAuthenticated?.call();
+    return unAuthenticated?.call(isSignIn);
   }
 
   @override
@@ -356,11 +384,11 @@ class _$UnAuthenticatedImpl<T> implements _UnAuthenticated<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? authenticated,
-    TResult Function()? unAuthenticated,
+    TResult Function(bool isSignIn)? unAuthenticated,
     required TResult orElse(),
   }) {
     if (unAuthenticated != null) {
-      return unAuthenticated();
+      return unAuthenticated(isSignIn);
     }
     return orElse();
   }
@@ -401,5 +429,11 @@ class _$UnAuthenticatedImpl<T> implements _UnAuthenticated<T> {
 }
 
 abstract class _UnAuthenticated<T> implements AppState<T> {
-  const factory _UnAuthenticated() = _$UnAuthenticatedImpl<T>;
+  const factory _UnAuthenticated({required final bool isSignIn}) =
+      _$UnAuthenticatedImpl<T>;
+
+  bool get isSignIn;
+  @JsonKey(ignore: true)
+  _$$UnAuthenticatedImplCopyWith<T, _$UnAuthenticatedImpl<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }

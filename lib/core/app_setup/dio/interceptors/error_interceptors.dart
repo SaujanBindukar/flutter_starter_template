@@ -13,7 +13,7 @@ class ErrorInterceptors extends InterceptorsWrapper {
     if (err.response?.statusCode == 401) {
       ref
           .read(appNotifierProvider.notifier)
-          .updateAppState(const AppState.unAuthenticated());
+          .updateAppState(const AppState.unAuthenticated(isSignIn: true));
     }
     super.onError(err, handler);
   }

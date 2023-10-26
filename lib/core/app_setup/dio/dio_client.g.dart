@@ -20,7 +20,7 @@ final baseUrlProvider = AutoDisposeProvider<String>.internal(
 );
 
 typedef BaseUrlRef = AutoDisposeProviderRef<String>;
-String _$dioHash() => r'305178d06a0bbc4017761b5e5ddceafda0ff493f';
+String _$dioHash() => r'8dce317843278a1b09fef03458e3c1648cda1846';
 
 /// See also [dio].
 @ProviderFor(dio)

@@ -39,7 +39,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               }
               await Hive.deleteFromDisk();
               ref.read(appNotifierProvider.notifier).updateAppState(
-                    const AppState.unAuthenticated(),
+                    const AppState.unAuthenticated(isSignIn: true),
                   );
             },
             child: const Text('Logout')),

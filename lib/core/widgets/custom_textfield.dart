@@ -18,6 +18,8 @@ class CustomTextField extends StatefulWidget {
     this.labelText,
     this.inputFormatters,
     this.autofillHints,
+    this.prefixIcon,
+    this.validator,
   });
   final TextEditingController controller;
   bool obscureText;
@@ -33,6 +35,8 @@ class CustomTextField extends StatefulWidget {
   final int? length;
   final String? labelText;
   final List<String>? autofillHints;
+  final Widget? prefixIcon;
+  final String? Function(String?)? validator;
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
@@ -50,7 +54,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
         autofillHints: widget.autofillHints,
         enableSuggestions: false,
@@ -59,24 +63,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         onTap: widget.onTap,
         controller: widget.controller,
         onFieldSubmitted: onFieldSubmitted,
-        validator: (value) {
-          final emailRegex = RegExp(
-              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-          if (value == null || value == '') {
-            return '${widget.hintText} is required.';
-          }
-          if (widget.hintText == 'Email') {
-            if (!emailRegex.hasMatch(value.trim())) {
-              return 'Email is not valid';
-            }
-          } else if (widget.hintText == 'Password') {
-            if (value.length < 8) {
-              return 'Password should be at least 8 character.';
-            }
-          }
-
-          return null;
-        },
+        validator: widget.validator,
         inputFormatters: widget.inputFormatters ?? [],
         keyboardType: widget.textInputType,
         textInputAction: widget.textInputAction ??
@@ -87,6 +74,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         decoration: InputDecoration(
           hintText: widget.hintText,
           labelText: widget.labelText,
+          prefixIcon: widget.prefixIcon,
           suffixIcon: widget.hintText == 'Password'
               ? IconButton(
                   splashColor: Colors.transparent,

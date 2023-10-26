@@ -20,7 +20,7 @@ class RequestInterceptors extends InterceptorsWrapper {
       tokenResponse.fold(
         (failure) {
           ref.read(appNotifierProvider.notifier).updateAppState(
-                const AppState.unAuthenticated(),
+                const AppState.unAuthenticated(isSignIn: true),
               );
         },
         (token) {

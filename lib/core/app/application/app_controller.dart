@@ -16,7 +16,7 @@ class AppNotifier extends _$AppNotifier {
   Future<AppState> _appStarted() async {
     final token = await ref.read(authRepositoryProvider).getToken();
     return token.fold(
-      (failure) => const AppState.unAuthenticated(),
+      (failure) => const AppState.unAuthenticated(isSignIn: true),
       (token) => const AppState.authenticated(),
     );
   }
