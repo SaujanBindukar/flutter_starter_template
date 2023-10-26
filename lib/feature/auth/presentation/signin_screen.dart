@@ -7,7 +7,6 @@ import 'package:flutter_starter_template/core/utils/validators.dart';
 import 'package:flutter_starter_template/core/widgets/custom_button.dart';
 import 'package:flutter_starter_template/core/widgets/custom_textfield.dart';
 import 'package:flutter_starter_template/feature/auth/application/auth_controller.dart';
-import 'package:go_router/go_router.dart';
 
 final signInProvider =
     AutoDisposeAsyncNotifierProvider<AuthNotifier, Object?>(AuthNotifier.new);
@@ -23,9 +22,8 @@ class SignInScreen extends ConsumerStatefulWidget {
 }
 
 class _SignInScreenState extends ConsumerState<SignInScreen> {
-  final _emailController =
-      TextEditingController(text: 'sauzanbindukar@gmail.com');
-  final _passwordController = TextEditingController(text: 'saujan123');
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   @override
@@ -36,6 +34,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         context.showSnackBar(message: '${next.error}');
       }
     });
+    //
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(),
@@ -69,7 +68,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   controller: _passwordController,
                   hintText: 'Password',
                   labelText: 'Password',
-                  obscureText: true,
                   prefixIcon: const Icon(Icons.lock_open_outlined),
                   validator: Validators.passwordValidators,
                 ),
@@ -81,12 +79,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       padding: EdgeInsets.zero,
                       name: 'Login',
                       isLoading: authState is AsyncLoading,
-                      onPressed: () {
-                        ref.read(signInProvider.notifier).login(
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                            );
-                      },
+                      onPressed: _onSignIn,
                     );
                   },
                 ),
@@ -98,6 +91,16 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         ),
       ),
     );
+  }
+
+  void _onSignIn() {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    ref.read(signInProvider.notifier).login(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
   }
 }
 

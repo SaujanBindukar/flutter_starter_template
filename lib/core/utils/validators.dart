@@ -15,6 +15,13 @@ class Validators {
     return null;
   }
 
+  static String? requiredFieldValidators(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please fill the field';
+    }
+    return null;
+  }
+
   static String? passwordValidators(String? password) {
     if (password == null || password.isEmpty) {
       return 'Password is required';

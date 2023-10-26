@@ -15,12 +15,13 @@ class AppObserver extends ConsumerWidget {
     return Scaffold(
       body: Center(
         child: appState.map(
-            started: (_) => const CircularProgressIndicator(),
-            authenticated: (_) => const HomeScreen(),
-            unAuthenticated: (value) {
-              if (value.isSignIn) return const SignInScreen();
-              return const SignUpScreen();
-            }),
+          started: (_) => const CircularProgressIndicator(),
+          authenticated: (_) => const HomeScreen(),
+          unAuthenticated: (value) {
+            if (value.isSignIn) return const SignInScreen();
+            return const SignUpScreen();
+          },
+        ),
       ),
     );
   }

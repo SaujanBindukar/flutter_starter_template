@@ -7,14 +7,37 @@ part 'auth_controller.g.dart';
 
 @riverpod
 class AuthNotifier extends _$AuthNotifier {
+  late IAuthRepository authRepository;
   @override
-  FutureOr<void> build() {}
+  FutureOr<void> build() {
+    authRepository = ref.read(iAuthRespositoryProvider);
+  }
 
-  Future<void> signup() async {
-    state = const AsyncLoading();
-    await Future.delayed(const Duration(seconds: 5));
-
-    state = const AsyncData('');
+  Future<void> signup({
+    required String name,
+    required String email,
+    required String password,
+    String? address,
+  }) async {
+    state = const AsyncValue.loading();
+    final response = await authRepository.singup(
+      email: email,
+      password: password,
+      name: name,
+      address: address,
+    );
+    response.fold((failure) {
+      state = AsyncValue.error(
+        failure.reason,
+        StackTrace.current,
+      );
+    }, (success) {
+      //navigate to homescreen after register success
+      ref.read(appNotifierProvider.notifier).updateAppState(
+            const AppState.authenticated(),
+          );
+      state = AsyncValue.data(success);
+    });
   }
 
   Future<void> login({
@@ -22,8 +45,8 @@ class AuthNotifier extends _$AuthNotifier {
     required String password,
   }) async {
     state = const AsyncValue.loading();
-    final authRepo = ref.read(iAuthRespositoryProvider);
-    final response = await authRepo.login(
+
+    final response = await authRepository.login(
       email: email,
       password: password,
     );
@@ -34,7 +57,7 @@ class AuthNotifier extends _$AuthNotifier {
         StackTrace.current,
       );
     }, (success) async {
-      await ref.read(iAuthRespositoryProvider).saveToken(token: success);
+      await authRepository.saveToken(token: success);
       ref
           .read(appNotifierProvider.notifier)
           .updateAppState(const AppState.authenticated());

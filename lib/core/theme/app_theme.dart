@@ -40,6 +40,7 @@ class AppTheme {
       titleLarge: TextStyle(
         fontWeight: FontWeight.bold,
       ),
+      // you can add others here
     ),
   );
 
@@ -82,6 +83,8 @@ class AppTheme {
       titleLarge: TextStyle(
         fontWeight: FontWeight.bold,
       ),
+
+      // you can add others here
     ),
   );
 }

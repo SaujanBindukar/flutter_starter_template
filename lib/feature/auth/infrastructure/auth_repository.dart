@@ -97,7 +97,7 @@ class AuthRepository implements IAuthRepository {
         'name': name,
         if (address != null) 'address': address,
       };
-      await _dio.post<Map<String, dynamic>>(
+      final response = await _dio.post<Map<String, dynamic>>(
         AuthEP.signup,
         data: body,
         options: Options(
@@ -105,7 +105,7 @@ class AuthRepository implements IAuthRepository {
           extra: <String, bool>{'tokenRequired': false},
         ),
       );
-      return const Right('');
+      return Right(response.data!['token']);
     } on DioException catch (error) {
       return Left(error.toFailure);
     } catch (e) {

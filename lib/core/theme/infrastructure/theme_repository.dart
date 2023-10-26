@@ -3,6 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_starter_template/core/app_setup/hive/hive_box.dart';
 import 'package:hive/hive.dart';
 
+// iThemeRepositoryProvider can be implmented as:
+//
+// @riverpod
+// IThemeRepository iThemeRepository(Ref ref) {
+//   return ThemeRepository();
+// }
+
 final iThemeRepositoryProvider = Provider<IThemeRepository>((ref) {
   return ThemeRepository();
 });
