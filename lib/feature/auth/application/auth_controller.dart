@@ -14,7 +14,7 @@ class AuthNotifier extends _$AuthNotifier {
     state = const AsyncLoading();
     await Future.delayed(const Duration(seconds: 5));
 
-    state = const AsyncData('');
+    state = const AsyncData<dynamic>('');
   }
 
   Future<void> login({

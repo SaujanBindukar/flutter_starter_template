@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static final lightTheme = ThemeData(
+    fontFamily: 'PlaypenSans',
     useMaterial3: true,
     colorScheme: const ColorScheme.light(
       background: Color(0xffFFFFFF),
@@ -35,10 +36,15 @@ class AppTheme {
         borderSide: BorderSide(color: Colors.black),
       ),
     ),
-    textTheme: const TextTheme(),
+    textTheme: const TextTheme(
+      titleLarge: TextStyle(
+        fontWeight: FontWeight.bold,
+      ),
+    ),
   );
 
   static final darkTheme = ThemeData(
+    fontFamily: 'PlaypenSans',
     useMaterial3: true,
     colorScheme: const ColorScheme.dark(
       background: Color(0xff121212),
@@ -72,6 +78,10 @@ class AppTheme {
         borderSide: BorderSide(color: Colors.white),
       ),
     ),
-    textTheme: const TextTheme(),
+    textTheme: const TextTheme(
+      titleLarge: TextStyle(
+        fontWeight: FontWeight.bold,
+      ),
+    ),
   );
 }

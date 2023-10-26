@@ -60,13 +60,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
         controller: widget.controller,
         onFieldSubmitted: onFieldSubmitted,
         validator: (value) {
-          final regex = RegExp(
+          final emailRegex = RegExp(
               r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
           if (value == null || value == '') {
             return '${widget.hintText} is required.';
           }
           if (widget.hintText == 'Email') {
-            if (!regex.hasMatch(value.trim())) {
+            if (!emailRegex.hasMatch(value.trim())) {
               return 'Email is not valid';
             }
           } else if (widget.hintText == 'Password') {
