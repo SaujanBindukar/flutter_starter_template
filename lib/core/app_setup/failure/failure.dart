@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 /// Custom object for handling failures and exceptions
 class Failure {
@@ -29,17 +28,6 @@ class Failure {
   /// [code] is for logging, not to check failure condition
   ///
   final int? code;
-}
-
-extension FailureExtension on Failure {
-  showError(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(reason),
-        duration: const Duration(seconds: 2),
-      ),
-    );
-  }
 }
 
 /// Extension for [DioException]

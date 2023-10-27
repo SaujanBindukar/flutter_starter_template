@@ -1,4 +1,4 @@
-import 'package:flutter_starter_template/core/app/app_observer.dart';
+import 'package:flutter_starter_template/core/app/presentation/app_observer.dart';
 import 'package:flutter_starter_template/feature/auth/presentation/signin_screen.dart';
 import 'package:flutter_starter_template/feature/auth/presentation/signup_screen.dart';
 import 'package:flutter_starter_template/feature/home/presentation/home_screen.dart';

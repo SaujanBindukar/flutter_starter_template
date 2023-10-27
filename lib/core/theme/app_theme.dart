@@ -37,11 +37,14 @@ class AppTheme {
       ),
     ),
     textTheme: const TextTheme(
-      titleLarge: TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
-      // you can add others here
-    ),
+        titleLarge: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+        headlineSmall: TextStyle(
+          fontWeight: FontWeight.w700,
+        )
+        // you can add others here
+        ),
   );
 
   static final darkTheme = ThemeData(
@@ -80,11 +83,12 @@ class AppTheme {
       ),
     ),
     textTheme: const TextTheme(
-      titleLarge: TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
+        titleLarge: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+        headlineSmall: TextStyle(fontWeight: FontWeight.w700)
 
-      // you can add others here
-    ),
+        // you can add others here
+        ),
   );
 }

@@ -1,6 +1,7 @@
 import 'package:flutter_starter_template/core/app/application/app_controller.dart';
-import 'package:flutter_starter_template/core/app/app_state.dart';
-import 'package:flutter_starter_template/feature/auth/infrastructure/auth_repository.dart';
+import 'package:flutter_starter_template/core/app/infrastructure/app_state.dart';
+import 'package:flutter_starter_template/feature/auth/infrastructure/repository/auth_repository.dart';
+import 'package:flutter_starter_template/feature/auth/infrastructure/repository/auth_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_controller.g.dart';
@@ -10,7 +11,7 @@ class AuthNotifier extends _$AuthNotifier {
   late IAuthRepository authRepository;
   @override
   FutureOr<void> build() {
-    authRepository = ref.read(iAuthRespositoryProvider);
+    authRepository = ref.read(authRepositoryProvider);
   }
 
   Future<void> signup({

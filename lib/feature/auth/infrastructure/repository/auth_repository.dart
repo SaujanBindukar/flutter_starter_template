@@ -2,15 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_starter_template/core/app_setup/dio/dio_client.dart';
-import 'package:flutter_starter_template/core/app_setup/failure.dart';
+import 'package:flutter_starter_template/core/app_setup/failure/failure.dart';
 import 'package:flutter_starter_template/core/app_setup/hive/hive_box.dart';
 import 'package:flutter_starter_template/core/services/app_endpoint.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:hive/hive.dart';
-
-final iAuthRespositoryProvider = Provider<IAuthRepository>((ref) {
-  return AuthRepository(ref: ref);
-});
 
 sealed class IAuthRepository {
   Future<Either<Failure, String>> getToken();

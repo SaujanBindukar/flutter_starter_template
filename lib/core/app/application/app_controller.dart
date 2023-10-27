@@ -1,5 +1,5 @@
-import 'package:flutter_starter_template/core/app/app_state.dart';
-import 'package:flutter_starter_template/feature/auth/infrastructure/auth_repository_provider.dart';
+import 'package:flutter_starter_template/core/app/infrastructure/app_state.dart';
+import 'package:flutter_starter_template/feature/auth/infrastructure/repository/auth_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_controller.g.dart';

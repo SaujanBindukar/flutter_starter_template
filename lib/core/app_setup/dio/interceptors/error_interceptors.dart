@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_starter_template/core/app/app_state.dart';
+import 'package:flutter_starter_template/core/app/infrastructure/app_state.dart';
 import 'package:flutter_starter_template/core/app/application/app_controller.dart';
 
 class ErrorInterceptors extends InterceptorsWrapper {
