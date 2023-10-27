@@ -1,4 +1,4 @@
-# flutter_starter_template
+# flutter_starter_template_with_rivepod_&_go_router
 
 This is the flutter starter template app with clean architecture using flutter_riverpod and go_router.
 
