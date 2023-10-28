@@ -84,7 +84,7 @@ lib
     <td><img style="display: inline-block " src="https://github.com/SaujanBindukar/flutter_starter_template/assets/34705432/dddf9308-62ba-411a-9382-e0a5aaeedc06.png" height="600" width="350"
 />
     </td>
-    <td><img style="display: inline-block" src="https://github.com/SaujanBindukar/flutter_starter_template/assets/34705432/8824ec37-e76d-40c5-b103-dc04acc1c01a.png" height="600" width="350"
+    <td><img style="display: inline-block" src="https://github.com/SaujanBindukar/flutter_starter_template/assets/34705432/09409a2f-22ce-421a-a2ea-d1c6a9d23332.png" height="600" width="350"
           />
     </td>
     </tr>
